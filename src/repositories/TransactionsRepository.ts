@@ -1,6 +1,6 @@
 import { EntityRepository, Repository, getRepository } from 'typeorm';
 
-import { response } from 'express';
+// import { response } from 'express';
 import Transaction from '../models/Transaction';
 import Category from '../models/Category';
 
