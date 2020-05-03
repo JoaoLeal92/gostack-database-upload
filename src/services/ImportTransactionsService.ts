@@ -33,16 +33,17 @@ class ImportTransactionsService {
     // Especifica o parser para ler a partir da segunda linha do csv (exclui cabeçalho)
     const parserConfig = csv({
       from_line: 2,
+      trim: true,
     });
 
     // Aplica configurações do parser
     const parsedTransactions = read_stream.pipe(parserConfig);
 
     // Inicia iteração por linha do CSV
-    parsedTransactions.on('data', async row => {
-      const [title, type, value, category] = row.map((field: string) =>
-        field.trim(),
-      );
+    parsedTransactions.on('data', async ([title, type, value, category]) => {
+      // const [title, type, value, category] = row.map((field: string) =>
+      //   field.trim(),
+      // );
 
       if (!title || !type || !value || !category) {
         throw new AppError('Ĩnvalid transaction parameters');
